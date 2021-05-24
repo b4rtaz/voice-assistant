@@ -1,0 +1,109 @@
+{
+	"name": "voice-assistant",
+	"displayName": "Voice Assistant",
+	"description": "Voice assistant extension for Visual Studio Code.",
+	"version": "1.0.0",
+	"publisher": "b4rtaz",
+	"engines": {
+		"vscode": "^1.32.0"
+	},
+	"activationEvents": [
+		"onView:dashboard"
+	],
+	"repository": "https://github.com/b4rtaz/voice-assistant.git",
+	"main": "dist/extension.js",
+	"icon": "media/icon.png",
+	"contributes": {
+		"configuration": [
+			{
+				"title": "Voice Assistant",
+				"properties": {
+					"voiceSnippets.serverHost": {
+						"type": "string",
+						"default": "localhost",
+						"description": "Server host (need to restart the editor)",
+						"scope": "window"
+					},
+					"voiceSnippets.serverPort": {
+						"type": "number",
+						"default": "9999",
+						"description": "Server port (need to restart the editor)",
+						"scope": "window"
+					}
+				}
+			}
+		],
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "dashboard",
+					"title": "Voice Assistant",
+					"icon": "media/icon-mic-white.svg"
+				}
+			]
+		},
+		"views": {
+			"dashboard": [
+				{
+					"id": "dashboard",
+					"name": "Voice Assistant",
+					"icon": "media/icon-mic-white.svg",
+					"contextualTitle": "dashboard"
+				}
+			]
+		},
+		"commands": [
+			{
+				"command": "voiceAssistant.reloadDefinition",
+				"title": "Reload definition"
+			},
+			{
+				"command": "voiceAssistant.addExampleJson",
+				"title": "Add example voice-assistant.json"
+			}
+		],
+		"menus": {
+			"view/title": [
+				{
+					"command": "voiceAssistant.reloadDefinition",
+					"when": "view == dashboard",
+					"group": "navigation"
+				}
+			],
+			"view/item/context": [
+				{
+					"command": "voiceAssistant.addExampleJson",
+					"when": "view == dashboard && viewItem == noDefinition",
+					"group": "inline"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vsce:package": "webpack && vsce package",
+		"build": "webpack",
+		"build:watch": "webpack --watch",
+		"lint": "eslint src/ --ext .ts,.tsx",
+		"pretest": "tsc -p ./",
+		"test": "mocha out/**/*.spec.js",
+		"vscode:test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/ws": "^7.4.4",
+		"@typescript-eslint/eslint-plugin": "^4.16.0",
+		"@typescript-eslint/parser": "^4.16.0",
+		"@types/node": "^12.12.0",
+		"@types/vscode": "^1.32.0",
+		"@types/mocha": "^8.2.2",
+		"eslint": "^7.21.0",
+		"typescript": "^4.2.2",
+		"vsce": "^1.88.0",
+		"mocha": "^8.4.0",
+		"ts-loader": "^9.2.2",
+		"webpack": "^5.37.1",
+		"webpack-cli": "^4.7.0"
+	},
+	"dependencies": {
+		"ws": "^6.0.0"
+	}
+}

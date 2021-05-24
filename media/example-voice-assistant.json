@@ -1,0 +1,39 @@
+{
+	"commands": [
+		{ "command": "Do undo",                  "action": "undo" },
+		{ "command": "Do copy",                  "action": "copy" },
+		{ "command": "Do cut",                   "action": "cut" },
+		{ "command": "Do delete",                "action": "delete" },
+		{ "command": "Do paste",                 "action": "paste" },
+		{ "command": "Do find",                  "action": "vsc-command:actions.find" },
+
+		{ "command": "Put nothing",              "snippet": "" },
+		{ "command": "Put zero",                 "snippet": "0" },
+		{ "command": "Put one",                  "snippet": "1" },
+		{ "command": "Put this",                 "snippet": "this." },
+		{ "command": "Put quote",                "snippet": "'" },
+		{ "command": "Put space",                "snippet": " " },
+		{ "command": "Put equal",                "snippet": "=" },
+		{ "command": "Put null",                 "snippet": "null" },
+		{ "command": "Put new line",             "snippet": "\n" },
+		{ "command": "Put function",             "snippet": "function " },
+		{ "command": "Put variable",             "snippet": "var " },
+		{ "command": "Put constant",             "snippet": "const " },
+		{ "command": "Put private",              "snippet": "private " },
+		{ "command": "Put public",               "snippet": "public " },
+		{ "command": "Put let",                  "snippet": "let ", "ext": [".ts", ".js"] },
+		{ "command": "Put throw error",          "snippet": "throw new Error($1);", "ext": [".ts", ".js"] },
+
+		{ "command": "Create for",               "snippet": "for ($1; $2; $3) {\n\t$4\n}\n", "ext": [".ts", ".js"] },
+		{ "command": "Create function",          "snippet": "function ${1:name}() {\n\t$2\n}\n", "ext": [".ts", ".js"] },
+		{ "command": "Create class",             "snippet": "export class ${1:name} {\n\t$2\n}\n", "ext": [".ts", ".js"] },
+		{ "command": "Create public function",   "snippet": "public ${1:name}() {\n\t$2\n}\n", "ext": [".ts", ".js"] },
+		{ "command": "Create private function",  "snippet": "private ${1:name}() {\n\t$2\n}\n", "ext": [".ts", ".js"] },
+		{ "command": "Create private property",  "snippet": "private ${1:name}: ${2:any} = ${3:null};\n", "ext": [".ts"] },
+		{ "command": "Create public property",   "snippet": "public ${1:name}: ${2:any} = ${3:null};\n", "ext": [".ts"] },
+		{ "command": "Create switch",            "snippet": "switch (${1:true}) {\n\t$2\n}\n", "ext": [".ts", ".js"] },
+		{ "command": "Create case",              "snippet": "case ${1:true}:\n\t$2\n\tbreak;\n", "ext": [".ts", ".js"] },
+		{ "command": "Create default",           "snippet": "default:\n\t$2\n\tbreak;\n", "ext": [".ts", ".js"] },
+		{ "command": "Create try catch",         "snippet": "try {\n\t$1\n} catch(${2:e}) {\n\t$3\n}\n", "ext": [".ts", ".js"] }
+	]
+}
