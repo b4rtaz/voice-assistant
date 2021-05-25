@@ -21,4 +21,15 @@ describe('DefinitionParser', () => {
 		assert.strictEqual(def.commands[1].ext?.length, 1);
 		assert.strictEqual(def.commands[1].ext[0], '.jpg');
 	});
+
+	it('read() throws error when definition does not contain any valid command', () => {
+		assert.throws(() => {
+			DefinitionParser.read(`{
+				"commands": [
+					{ "command": "x" },
+					{ "snippet": "y" }
+				]
+			}`);
+		}, Error, 'The definition file does not contain any command.');
+	});
 });

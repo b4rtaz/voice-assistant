@@ -1,10 +1,10 @@
-import { Definition } from './definition';
+import { CommandDefinition, Definition } from './definition';
 
 export class DefinitionParser {
 
 	public static read(content: string): Definition {
 		const json = JSON.parse(content) as Definition;
-		const result: Definition = { commands: [] };
+		const commands: CommandDefinition[] = [];
 
 		if (json.commands && Array.isArray(json.commands)) {
 			for (const snippet of json.commands) {
@@ -20,7 +20,7 @@ export class DefinitionParser {
 					continue;
 				}
 
-				result.commands.push({
+				commands.push({
 					command,
 					snippet: snippet.snippet,
 					action: snippet.action,
@@ -28,7 +28,11 @@ export class DefinitionParser {
 				});
 			}
 		}
-		return result;
+
+		if (commands.length < 1) {
+			throw new Error('The definition file does not contain any command.');
+		}
+		return { commands };
 	}
 
 	private static readExt(ext: any): string[] | undefined {

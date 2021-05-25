@@ -2,7 +2,7 @@
 	"name": "voice-assistant",
 	"displayName": "Voice Assistant",
 	"description": "Voice assistant extension for Visual Studio Code.",
-	"version": "1.0.0",
+	"version": "0.1.0",
 	"publisher": "b4rtaz",
 	"engines": {
 		"vscode": "^1.32.0"
