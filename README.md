@@ -4,7 +4,7 @@
 
 The voice assistant for Visual Studio Code. This extension allows you to put code snippets into the code by voice. Also, you can execute any Visual Studio command by voice. The extension works with any language, because the file with voice commands is placed in the project folder (voice-assistant.json). So, you can prepare own voice commands for each project.
 
-<p align="center"><img src="./.github/preview.gif" alt="Voice Assistant for VSCode" /></p>
+<p align="center"><img src="./.github/preview.gif" alt="Voice Assistant for VSCode" /><br />(<a href="https://twitter.com/b4rtaz/status/1396126210279759872">check an example with voice 🔉</a>)</p>
 
 🔥 Features:
 
@@ -16,7 +16,7 @@ The voice assistant for Visual Studio Code. This extension allows you to put cod
 
 ## 🚀 How to Start?
 
-1. **Install this extension** from the marketplace.
+1. **Install this extension** from [the marketplace](https://marketplace.visualstudio.com/items?itemName=b4rtaz.voice-assistant).
 2. **Install a server**. The server is necessary, because it does all speech recognition job. Currently we support only Windows.  
    💾 [Download server for Windows](https://github.com/b4rtaz/voice-assistant-net-server/releases/download/v0.1.0/VoiceAssistant.Server.0.1.0.zip) (it requires [.NET5](https://dotnet.microsoft.com/download/dotnet/5.0))
 3. **Add `voice-assistant.json` file** to root directory of your project and click "Reload definition". You may use [this example file](media/voice-assistant.json) or click "Add example voice-assistant.json" button.
