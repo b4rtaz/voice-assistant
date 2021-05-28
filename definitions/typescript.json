@@ -10,7 +10,6 @@
 		{ "command": "Put nothing",              "snippet": "" },
 		{ "command": "Put zero",                 "snippet": "0" },
 		{ "command": "Put one",                  "snippet": "1" },
-		{ "command": "Put this",                 "snippet": "this.", "ext": [".ts", ".js"] },
 		{ "command": "Put quote",                "snippet": "'" },
 		{ "command": "Put tabulator",            "snippet": "\t" },
 		{ "command": "Put space",                "snippet": " " },
@@ -22,6 +21,7 @@
 		{ "command": "Put constant",             "snippet": "const " },
 		{ "command": "Put private",              "snippet": "private " },
 		{ "command": "Put public",               "snippet": "public " },
+		{ "command": "Put this",                 "snippet": "this.", "ext": [".ts", ".js"] },
 		{ "command": "Put let",                  "snippet": "let ", "ext": [".ts", ".js"] },
 		{ "command": "Put throw error",          "snippet": "throw new Error($1);", "ext": [".ts", ".js"] },
 

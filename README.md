@@ -11,16 +11,30 @@ The voice assistant for Visual Studio Code. This extension allows you to put cod
 * multiple windows support,
 * diffrent voice commands for each project,
 * easy voice commands reloading,
-* it works with every language (TypeScript, JavaScript, HTML, CSS, PHP, C#...),
+* it works with every language,
 * VSCode command executing.
+
+☕ `voice-assistant.json` examples:
+
+* [TypeScript](definitions/typescript.json)
+* [HTML](definitions/html.json)
+* ...
+
+💻 Available speech recognition servers:
+
+* [.NET Server](https://github.com/b4rtaz/voice-assistant-net-server) (only for Windows)
 
 ## 🚀 How to Start?
 
 1. **Install this extension** from [the marketplace](https://marketplace.visualstudio.com/items?itemName=b4rtaz.voice-assistant).
 2. **Install & run a server**. The server is necessary, because it does all speech recognition job. Currently we support only Windows.  
-   💾 [Download server for Windows](https://github.com/b4rtaz/voice-assistant-net-server/releases/download/v0.1.0/VoiceAssistant.Server.0.1.0.zip) (it requires [.NET5](https://dotnet.microsoft.com/download/dotnet/5.0))
-3. **Add `voice-assistant.json` file** to root directory of your project and click "Reload definition". You may use [this example file](media/voice-assistant.json) or click "Add example voice-assistant.json" button.
+   * 💾 [Download .NET Server](https://github.com/b4rtaz/voice-assistant-net-server/releases/download/v0.1.0/VoiceAssistant.Server.0.1.0.zip) (only for Windows, it requires [.NET5](https://dotnet.microsoft.com/download/dotnet/5.0))
+3. **Add `voice-assistant.json` file** to root directory of your project and click "Reload definition". You may use [an example file](definitions/) or click "Add example voice-assistant.json" button.
 4. You can start speaking. 🎤
+
+## 📌 FAQ
+
+* **.NET Server doesn't recognize the speech** - you may boost the microphone power in Windows settings, try to speak correctly and sharply ([more](https://github.com/b4rtaz/voice-assistant/issues/3)).
 
 ## 💡 License
 

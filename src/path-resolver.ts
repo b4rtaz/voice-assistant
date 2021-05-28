@@ -7,8 +7,8 @@ export class PathResolver {
 		private readonly extensionContext: vscode.ExtensionContext) {
 	}
 
-	public getExtensionMediaPath(fileName: string): string {
-		return this.extensionContext.asAbsolutePath(`media/${fileName}`);
+	public getExtensionPath(fileName: string): string {
+		return this.extensionContext.asAbsolutePath(`${fileName}`);
 	}
 
 	public getWorkspacePath(fileName: string): string {

@@ -7,7 +7,7 @@ import { PathResolver } from '../path-resolver';
 import { reloadDefinitionFactory } from './reload-definition';
 
 export function addExampleJson(pathResolver: PathResolver, reloadDefinition: () => void) {
-	const sourcePath = pathResolver.getExtensionMediaPath(DEFINITION_FILE_NAME);
+	const sourcePath = pathResolver.getExtensionPath('definitions/typescript.json');
 	const targetPath = pathResolver.getWorkspacePath(DEFINITION_FILE_NAME);
 
 	const content = fs.readFileSync(sourcePath, 'utf-8');
