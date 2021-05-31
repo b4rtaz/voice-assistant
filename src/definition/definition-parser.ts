@@ -14,6 +14,9 @@ export class DefinitionParser {
 				if (typeof snippet.snippet !== 'string' && typeof snippet.action !== 'string') {
 					continue;
 				}
+				if (snippet.args && !Array.isArray(snippet.args)) {
+					continue;
+				}
 
 				const command = snippet.command.trim().toLowerCase();
 				if (!command) {
@@ -24,7 +27,8 @@ export class DefinitionParser {
 					command,
 					snippet: snippet.snippet,
 					action: snippet.action,
-					ext: DefinitionParser.readExt(snippet.ext)
+					ext: DefinitionParser.readExt(snippet.ext),
+					args: snippet.args
 				});
 			}
 		}

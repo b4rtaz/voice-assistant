@@ -5,7 +5,8 @@
 		{ "command": "Do cut",                   "action": "cut" },
 		{ "command": "Do delete",                "action": "delete" },
 		{ "command": "Do paste",                 "action": "paste" },
-		{ "command": "Do find",                  "action": "vsc-command:actions.find" },
+		{ "command": "Do open folder",           "action": "vsc-command:vscode.openFolder" },
+		{ "command": "Do find class",            "action": "vsc-command:workbench.action.findInFiles", "args": [ { "query": "class" } ] },
 
 		{ "command": "Put nothing",              "snippet": "" },
 		{ "command": "Put zero",                 "snippet": "0" },

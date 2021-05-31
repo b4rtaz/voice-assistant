@@ -10,4 +10,5 @@ export interface CommandDefinition {
 	command: string;
 	snippet?: string;
 	action?: string;
+	args?: any[];
 }

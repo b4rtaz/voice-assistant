@@ -3,6 +3,7 @@ import * as vscode from 'vscode';
 import { Container } from '../container';
 import { DefinitionService } from '../definition/definition-service';
 import { CommandRecognizedMessage } from '../messages';
+import { buildVsCodeCommandArgs } from './vscode-command-args-builder';
 
 export function handleCommandRecognized(
 	message: CommandRecognizedMessage,
@@ -28,32 +29,11 @@ export function handleCommandRecognized(
 	if (command.snippet !== undefined) {
 		editor.insertSnippet(new vscode.SnippetString(command.snippet));
 	} else if (command.action) {
-		const vscc = extractVscCommand(command.action);
-		if (vscc) {
-			vscode.commands.executeCommand(vscc);
-		} else {
-			console.warn(`Not supported action: ${command.action}.`);
+		const args = buildVsCodeCommandArgs(command.action, command.args);
+		if (args) {
+			vscode.commands.executeCommand.apply(null, args);
 		}
 	}
-}
-
-function extractVscCommand(action: string): string | null {
-	if (action.startsWith('vsc-command:')) {
-		return action.substring(12);
-	}
-	switch (action) {
-		case 'undo':
-			return 'undo';
-		case 'copy':
-			return 'editor.action.clipboardCopyAction';
-		case 'cut':
-			return 'editor.action.clipboardCutAction';
-		case 'delete':
-			return 'deleteLeft';
-		case 'paste':
-			return 'editor.action.clipboardPasteAction';
-	}
-	return null;
 }
 
 export function handleCommandRecognizedFactory(container: Container) {
