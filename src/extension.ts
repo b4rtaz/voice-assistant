@@ -9,17 +9,23 @@ import { refreshDashboardFactory } from './commands/reload-dashboard';
 import { reloadDefinitionFactory } from './commands/reload-definition';
 import { Container } from './container';
 import { definitionServiceFactory } from './definition/definition-service';
+import { VscodeFileReader } from './file-system/vscode-file-reader';
+import { VscodeFileWriter } from './file-system/vscode-file-writer';
 import { PathResolver } from './path-resolver';
 import { dashboardFactory } from './views/dashboard';
 
 export function activate(context: vscode.ExtensionContext) {
 	const container = new Container();
 
+	container.set('FileReader', new VscodeFileReader());
+	container.set('FileWriter', new VscodeFileWriter());
 	container.set('PathResolver', new PathResolver(context));
 	container.set('ClientConfigurationProvider', new ClientConfigurationProvider());
 
-	const dictionary = container.set('DefinitionService', definitionServiceFactory(container));
+	const definitionService = container.set('DefinitionService', definitionServiceFactory(container));
 	const client = container.set('WebSocketClient', webSocketClientFactory(container));
+
+	context.subscriptions.push(definitionService);
 	context.subscriptions.push(client);
 
 	const dashboard = container.set('Dashboard', dashboardFactory(container));
@@ -30,15 +36,15 @@ export function activate(context: vscode.ExtensionContext) {
 	vscode.commands.registerCommand('voiceAssistant.reloadDefinition', reloadDefinitionFactory(container));
 	vscode.commands.registerCommand('voiceAssistant.addExampleJson', addExampleJsonFactory(container));
 
-	client.statusChanged(refreshDashboardFactory(container), null, context.subscriptions);
-	client.statusChanged(activateFactory(container), null, context.subscriptions);
-	client.messageReceived(handleServerMessageFactory(container), null, context.subscriptions);
+	client.statusChanged.listen(refreshDashboardFactory(container));
+	client.statusChanged.listen(activateFactory(container));
+	client.messageReceived.listen(handleServerMessageFactory(container));
 
-	dictionary.statusChanged(refreshDashboardFactory(container), null, context.subscriptions);
-	dictionary.statusChanged(activateFactory(container), null, context.subscriptions);
+	definitionService.statusChanged.listen(refreshDashboardFactory(container));
+	definitionService.statusChanged.listen(activateFactory(container));
 
 	client.connect();
-	dictionary.tryLoad();
+	definitionService.tryLoad();
 }
 
 export function deactivate() {

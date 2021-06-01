@@ -3,7 +3,7 @@ import * as vscode from 'vscode';
 import { ActivateMessage } from '../messages';
 import { WebSocketClient, WebSocketClientStatus } from '../client/web-socket-client';
 import { Container } from '../container';
-import { DefinitionService, SnippetsDictionaryStatus } from '../definition/definition-service';
+import { DefinitionService, DefinitionServiceStatus } from '../definition/definition-service';
 
 export function activate(client: WebSocketClient, definitionService: DefinitionService) {
 	if (!vscode.window.state.focused) {
@@ -12,7 +12,7 @@ export function activate(client: WebSocketClient, definitionService: DefinitionS
 	if (client.status !== WebSocketClientStatus.connected) {
 		return;
 	}
-	if (definitionService.status !== SnippetsDictionaryStatus.loaded) {
+	if (definitionService.status !== DefinitionServiceStatus.loaded) {
 		return;
 	}
 

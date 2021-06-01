@@ -2,11 +2,12 @@ import * as vscode from 'vscode';
 
 import { WebSocketClient, WebSocketClientStatus } from '../client/web-socket-client';
 import { Container } from '../container';
-import { SetCommandsMessage } from '../messages';
 import { DefinitionService } from '../definition/definition-service';
+import { SetCommandsMessage } from '../messages';
 
-export function reloadDefinition(definitionService: DefinitionService, client: WebSocketClient) {
-	if (!definitionService.tryLoad() || !definitionService.definition) {
+export async function reloadDefinition(definitionService: DefinitionService, client: WebSocketClient) {
+	if (!(await definitionService.tryLoad()) || !definitionService.definition) {
+		vscode.window.showErrorMessage(`Cannot reload a definition. Error: ${definitionService.lastError}`);
 		return;
 	}
 

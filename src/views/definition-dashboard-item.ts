@@ -1,8 +1,8 @@
 import { TreeItemCollapsibleState } from 'vscode';
 
 import { Container } from '../container';
-import { CommandDefinition, DEFINITION_FILE_NAME } from '../definition/definition';
-import { DefinitionService, SnippetsDictionaryStatus } from '../definition/definition-service';
+import { CommandDefinition } from '../definition/definition';
+import { DefinitionService, DefinitionServiceStatus } from '../definition/definition-service';
 import { PathResolver } from '../path-resolver';
 import { DashboardItem } from './dashboard-item';
 
@@ -14,19 +14,13 @@ export class DefinitionDashboardItem extends DashboardItem {
 		super(createLabel(definitionService), TreeItemCollapsibleState.Expanded);
 
 		switch (definitionService.status) {
-			case SnippetsDictionaryStatus.notFound:
-				this.iconPath = pathResolver.getExtensionPath('media/icon-failed.svg');
-				this.description = `${DEFINITION_FILE_NAME} file not found in the workspace.`;
-				this.contextValue = 'noDefinition';
-				break;
-
-			case SnippetsDictionaryStatus.loaded:
+			case DefinitionServiceStatus.loaded:
 				this.iconPath = pathResolver.getExtensionPath('media/icon-success.svg');
 				this.description = '';
 				this.contextValue = 'definition';
 				break;
 
-			case SnippetsDictionaryStatus.error:
+			case DefinitionServiceStatus.error:
 				this.iconPath = pathResolver.getExtensionPath('media/icon-failed.svg');
 				this.description = `Error: ${definitionService.lastError}`;
 				this.contextValue = 'noDefinition';
@@ -42,7 +36,7 @@ export class DefinitionDashboardItem extends DashboardItem {
 }
 
 function createLabel(ds: DefinitionService): string {
-	return ds.status === SnippetsDictionaryStatus.loaded
+	return ds.status === DefinitionServiceStatus.loaded
 		? `${ds.definition?.commands.length} commands`
 		: 'Commands';
 }
@@ -59,8 +53,8 @@ export class CommandDashboardItem extends DashboardItem {
 			? snippet.ext.join(', ')
 			: '';
 		this.iconPath = {
-			dark: pathResolver.getExtensionPath('icon-mic-white.svg'),
-			light: pathResolver.getExtensionPath('icon-mic-black.svg')
+			dark: pathResolver.getExtensionPath('media/icon-mic-white.svg'),
+			light: pathResolver.getExtensionPath('media/icon-mic-black.svg')
 		};
 	}
 

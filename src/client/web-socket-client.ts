@@ -1,18 +1,15 @@
 import { TextDecoder } from 'util';
-import { EventEmitter } from 'vscode';
 import * as WebSocket from 'ws';
 
 import { Container } from '../container';
 import { Message } from '../messages';
+import { SimpleEvent } from '../simple-event';
 import { ClientConfigurationProvider } from './client-configuration-provider';
 
 export class WebSocketClient {
 
-	private readonly _statusChanged = new EventEmitter<void>();
-	public readonly statusChanged = this._statusChanged.event;
-
-	private readonly _messageReceived = new EventEmitter<Message>();
-	public readonly messageReceived = this._messageReceived.event;
+	public readonly statusChanged = new SimpleEvent();
+	public readonly messageReceived = new SimpleEvent<Message>();
 
 	public status: WebSocketClientStatus = WebSocketClientStatus.disconnected;
 	public lastError: string | null = null;
@@ -44,6 +41,8 @@ export class WebSocketClient {
 		if (this.socket) {
 			this.socket.close();
 		}
+		this.statusChanged.dispose();
+		this.messageReceived.dispose();
 	}
 
 	private tryConnect() {
@@ -77,13 +76,13 @@ export class WebSocketClient {
 		this.socket.onmessage = (event: WebSocket.MessageEvent) => {
 			const payload = new TextDecoder('utf-8').decode(event.data as Buffer);
 			const message = JSON.parse(payload);
-			this._messageReceived.fire(message as Message);
+			this.messageReceived.fire(message as Message);
 		};
 	}
 
 	private updateStatus(newStatus: WebSocketClientStatus) {
 		this.status = newStatus;
-		this._statusChanged.fire();
+		this.statusChanged.fire();
 	}
 }
 

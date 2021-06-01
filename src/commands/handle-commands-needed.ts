@@ -1,13 +1,13 @@
 import { WebSocketClient } from '../client/web-socket-client';
 import { Container } from '../container';
 import { SetCommandsMessage } from '../messages';
-import { DefinitionService, SnippetsDictionaryStatus } from '../definition/definition-service';
+import { DefinitionService, DefinitionServiceStatus } from '../definition/definition-service';
 
 export function handleCommandsNeeded(
 	definitionService: DefinitionService,
 	client: WebSocketClient)
 {
-	if (definitionService.status !== SnippetsDictionaryStatus.loaded || !definitionService.definition) {
+	if (definitionService.status !== DefinitionServiceStatus.loaded || !definitionService.definition) {
 		return;
 	}
 
